@@ -105,7 +105,9 @@ var longestPalindrome0 = function (s) {
   return s.slice(targetL, targetL + maxLen);
 };
 
-var longestPalindrome = function (s) {
+/*Divide it into two cases.*/
+/** put into odd form (aba) and even form(abba) */
+var longestPalindrome1 = function (s) {
   if (s.length === 1) return s;
   let cur = 0;
   let targetL = 0;
@@ -126,22 +128,12 @@ var longestPalindrome = function (s) {
       }
     }
 
-    // in case of "bb" where left<0 but right <s.length
-    while (right < s.length) {
-      if (s[right] === s[cur] && s[right] === s[right - 1]) {
-        right++;
-      } else {
-        break;
-      }
-    }
-
     left += 1;
     right -= 1;
     let len = right - left + 1;
 
     if (maxLen < len) {
       maxLen = len;
-      // targetR = right;
       targetL = left;
     }
     cur++;
