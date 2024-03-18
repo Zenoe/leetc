@@ -1,3 +1,4 @@
+// dict method
 var threeSumAcc = function (nums) {
   const result = [];
   nums.sort((a, b) => a - b);
@@ -16,9 +17,9 @@ var threeSumAcc = function (nums) {
   return result;
 };
 
+// LTE
 var threeSum0 = function (nums) {
   nums = nums.sort((a, b) => a - b);
-
   const result = [];
   for (let i = 0; i < nums.length; i++) {
     for (let j = i + 1; j < nums.length; j++) {
@@ -41,8 +42,8 @@ var threeSum0 = function (nums) {
   return result;
 };
 
+// LTE
 var threeSum1 = function (nums) {
-  // js sort alphabetically by default, must supply sort func
   nums = nums.sort((a, b) => a - b);
   const result = [];
   for (let i = 0; i < nums.length; i++) {
@@ -55,7 +56,6 @@ var threeSum1 = function (nums) {
       if (nums[i] + nums[j] > 0) break;
       for (let k = j + 1; k < nums.length; k++) {
         if (k > j + 1 && nums[k] === nums[k - 1]) continue;
-        // console.log("k:", nums[i], nums[j], nums[k]);
         if (nums[i] + nums[j] + nums[k] === 0) {
           result.push([nums[i], nums[j], nums[k]]);
           break;

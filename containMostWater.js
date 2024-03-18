@@ -49,8 +49,19 @@ var maxArea1 = function (height) {
 
 var maxArea = function (height) {
   let maxArea = 0;
-  for (let i = 0; i < height.length - 1; i++) {}
+  let left = 0;
+  let right = height.length - 1;
+  while (left < right) {
+    // let step = Math.abs(right - left);
+    let area = (right - left) * Math.min(height[left], height[right]);
 
+    if (area > maxArea) maxArea = area;
+    if (height[right] < height[left]) {
+      right--;
+    } else {
+      left++;
+    }
+  }
   return maxArea;
 };
 
