@@ -1,3 +1,19 @@
+var isPalindrome = function (x) {
+  if (x < 0) return false;
+  let y = x;
+  let z = 0;
+  while (y) {
+    z = 10 * z + (y % 10);
+    // y = Math.floor(y / 10);
+    // ~~  is a bitwise operator that is used to perform a fast alternative to Math.floor() for converting a
+    // floating-point number to an integer. When you apply the double tilde to a number,
+    // it effectively performs a bitwise NOT operation twice, which results in converting the number to a 32-bit integer.
+    y = ~~(y / 10);
+  }
+  return z === x;
+};
+
+// attention better
 const isPalindromeNotMine = function (x) {
   if (x < 0 || (x !== 0 && x % 10 == 0)) {
     return false;
@@ -10,29 +26,11 @@ const isPalindromeNotMine = function (x) {
   return x == half || x == Math.floor(half / 10);
 };
 
-var isPalindromeBetterNotMine = function (x) {
-  var reverse = 0;
-  var copy = x;
-
-  //The loop break when the copy of original number becomes zero
-  //Also negative number cannot be a palindrome
-  while (copy > 0) {
-    const digit = copy % 10;
-    reverse = reverse * 10 + digit;
-    // ~~  is a bitwise operator that is used to perform a fast alternative to Math.floor() for converting a
-    // floating-point number to an integer. When you apply the double tilde to a number,
-    // it effectively performs a bitwise NOT operation twice, which results in converting the number to a 32-bit integer.
-    copy = ~~(copy / 10);
-  }
-
-  return reverse == x;
-};
-
 /**
  * @param {number} x
  * @return {boolean}
  */
-var isPalindrome = function (x) {
+var isPalindrome0 = function (x) {
   if (x < 0) return false;
   const digcount = Math.floor(Math.log10(x)) + 1;
   let mid = digcount >> 1;
