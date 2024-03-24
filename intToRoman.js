@@ -31,6 +31,7 @@ var intToRomanNotMine = function (num) {
 
   var result = "";
   for (var ch in obj) {
+    // attention new
     result += ch.repeat(obj[ch]);
   }
   return result;
@@ -71,7 +72,7 @@ var intToRomanOther = function (num) {
 
 var intToRoman = function (num) {
   // dic.key is sorted alphebaticlly by default ?
-  // can also define two separated array
+  // can also define two separated array to store keys and values
   let dic = {
     1000: "M",
     900: "CM",
