@@ -61,7 +61,8 @@ var divideOther = function (dividend, divisor) {
 };
 
 var divide = function (dividend, divisor) {
-  let isPositive = Math.sign(dividend) === Math.sign(divisor);
+  // learn
+  let isPositive1 = dividend >= 0 === divisor >= 0;
   dividend = Math.abs(dividend);
   divisor = Math.abs(divisor);
 
