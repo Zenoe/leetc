@@ -36,21 +36,52 @@ var sortSubArray = (nums, start, end) => {
 var nextPermutation = function (nums) {
   let e = nums.length - 1;
   let i = nums.length - 2;
-  console.log(nums);
   for (; i >= 0; i--) {
     if (nums[i] < nums[i + 1]) {
       // assign nums[i] to be min of all vlues in nums[i+1,...e] that larger than nums[i]
       let idx = findIdx(nums, i + 1, e, nums[i]);
-      console.log(idx, i);
       let t = nums[i];
       nums[i] = nums[idx];
       nums[idx] = t;
-      console.log(nums);
       // sortSubArray(nums, i + 1, e);
       break;
     }
   }
   sortSubArray(nums, i + 1, e);
+};
+
+var nextPermutation = function (nums) {
+  let e = nums.length - 1;
+  let i = nums.length - 2;
+  for (; i >= 0; i--) {
+    if (nums[i] < nums[i + 1]) {
+      // assign nums[i] to be min of all vlues in nums[i+1,...e] that larger than nums[i]
+      // nums[i+1,...,e] are in decending order
+      let k = e;
+      // find the smallest one larger than nums[i]
+      for (; k >= i + 1; k--) {
+        if (nums[k] > nums[i]) break;
+      }
+
+      let t = nums[i];
+      nums[i] = nums[k];
+      nums[k] = t;
+      // sortSubArray(nums, i + 1, e);
+      break;
+    }
+  }
+
+  let l = i + 1,
+    r = e;
+  // reverse nums[i+1, e] to sort it in accending roder
+  while (l < r) {
+    let t = nums[l];
+    nums[l] = nums[r];
+    nums[r] = t;
+    l++;
+    r--;
+  }
+  // sortSubArray(nums, i + 1, e);
 };
 
 nums = [2, 3, 1];
