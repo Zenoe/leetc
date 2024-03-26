@@ -123,10 +123,42 @@ var generateParenthesis = function (n) {
   return result;
 };
 
+// write a few days later all by myself
+var generateParenthesis = function (n) {
+  let result = [];
+  let str = "(";
+
+  var backtrack = (comb, left, right) => {
+    if (left + right === n << 1) {
+      // learn there is essentialy the same by using either code
+      // the diff is subtle and usually not relevant when dealing with strings
+      // 'cause strings are immutable in js
+      // what slice do is to make a shallow copy to avoid the value in array is modified accidently
+      // if it holds the reference of target value
+      // result.push(comb.slice());
+      result.push(comb);
+      return;
+    }
+    if (left < n) {
+      comb += "(";
+      backtrack(comb, left + 1, right);
+      // back! (in every recursive call)
+      comb = comb.slice(0, -1);
+    }
+    if (left > right) {
+      comb += ")";
+      backtrack(comb, left, right + 1);
+    }
+  };
+
+  backtrack("(", 1, 0);
+  return result;
+};
+
 // console.log(generateParenthesis(1));
-console.log(generateParenthesis(4));
+// console.log(generateParenthesis(4));
 console.log(generateParenthesis(3));
-console.log(generateParenthesis(2));
+// console.log(generateParenthesis(2));
 // Example 1:
 
 // Input: n = 3
