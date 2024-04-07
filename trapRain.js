@@ -1,3 +1,4 @@
+// my brute force solution
 var trap = function (height) {
   let area = 0;
   let leftBorder = 0;
@@ -72,7 +73,69 @@ var trap = function (height) {
   }
   return area;
 };
+var trapOther = function (height) {
+  if (height.length === 0) return 0;
+  let left = 0;
+  let right = height.length - 1;
+  let leftMax = 0;
+  let rightMax = 0;
+  let totalWater = 0;
 
+  while (left < right) {
+    if (height[left] < height[right]) {
+      if (height[left] >= leftMax) {
+        leftMax = height[left];
+      } else {
+        totalWater += leftMax - height[left];
+      }
+      left++;
+    } else {
+      if (height[right] >= rightMax) {
+        rightMax = height[right];
+      } else {
+        totalWater += rightMax - height[right];
+      }
+      right--;
+    }
+  }
+
+  return totalWater;
+};
+
+// got the hint water[i]= min (max_left_height,max_right_height)-arr[i]
+var trap = function (height) {
+  if (height.length === 0) return 0;
+  let left = 0;
+  let right = height.length - 1;
+  let leftMax = 0;
+  let rightMax = 0;
+  let area = 0;
+  while (left <= right) {
+    //
+    if (height[left] >= leftMax) {
+      leftMax = height[left];
+      left++;
+      continue;
+    }
+    if (height[right] >= rightMax) {
+      rightMax = height[right];
+      right--;
+      continue;
+    }
+    // if(height[left] <leftMax){
+    if (leftMax <= rightMax) {
+      area += leftMax - height[left];
+      left++;
+    } else {
+      // leftMax > rightMax
+      // ipmt. calcute from the other direction
+      area += rightMax - height[right];
+      right--;
+    }
+    // }
+  }
+  return area;
+};
 // 11
 console.log(trap([2, 6, 3, 8, 2, 7, 2, 5, 0]));
 
