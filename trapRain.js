@@ -103,6 +103,7 @@ var trapOther = function (height) {
 };
 
 // got the hint water[i]= min (max_left_height,max_right_height)-arr[i]
+// divide into solving water amount of each one slot
 var trap = function (height) {
   if (height.length === 0) return 0;
   let left = 0;
