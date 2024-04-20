@@ -1,3 +1,4 @@
+// wrong
 var solveSudoku = function (board) {
   var isValidSudoku = function (board, i, j, val) {
     for (let k = 0; k < 9; k++) {
@@ -20,31 +21,10 @@ var solveSudoku = function (board) {
     return true;
   };
 
-  var backtrack1 = (board, i, j) => {
+  var backtrack = (board, i, j) => {
     if (j === 9) {
       j = 0;
       i += 1;
-      backtrack(board, i, j);
-    }
-    if (i === 9) return true;
-    if (board[i][j] === ".") {
-      for (let k = 1; k <= 9; k++) {
-        if (isValidSudoku(board, i, j, `${k}`)) {
-          board[i][j] = `${k}`;
-
-          if (!backtrack(board, i, j + 1)) {
-            board[i][j] = ".";
-          }
-        }
-      }
-    } else {
-      return backtrack(board, i, j + 1);
-    }
-  };
-  var backtrack = (board, i, j, flag) => {
-    if (j === 9) {
-      i += 1;
-      j = 0;
       backtrack(board, i, j);
     }
     if (i === 9) return true;
@@ -66,7 +46,8 @@ var solveSudoku = function (board) {
   // backTrack(board, 0, 0);
 };
 
-var solveSudoku = function (board) {
+// ok by me
+var solveSudokuOK = function (board) {
   var isValidSudoku = function (board, i, j, val) {
     for (let k = 0; k < 9; k++) {
       if (board[i][k] === val) {
