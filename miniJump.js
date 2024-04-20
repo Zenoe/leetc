@@ -1,21 +1,3 @@
-// learn
-var jumpOtherBetter = function (nums) {
-  const n = nums.length;
-  let curEnd = 0;
-  let maxReach = 0;
-  let jumps = 0;
-
-  for (let i = 0; i < n - 1; i++) {
-    maxReach = Math.max(maxReach, i + nums[i]);
-
-    if (i === curEnd) {
-      jumps++;
-      curEnd = maxReach;
-    }
-  }
-
-  return jumps;
-};
 // TLE
 var jump = function (nums) {
   let miniStep = Number.MAX_VALUE;
@@ -67,8 +49,55 @@ var jump = function (nums) {
   return jump;
 };
 
+// learn
+var jumpOther = function (nums) {
+  const n = nums.length;
+  let curEnd = 0;
+  let maxReach = 0;
+  let jumps = 0;
+
+  for (let i = 0; i < n - 1; i++) {
+    maxReach = Math.max(maxReach, i + nums[i]);
+
+    if (i === curEnd) {
+      jumps++;
+      curEnd = maxReach;
+    }
+  }
+
+  return jumps;
+};
+// var jump = function (nums) {
+//   let miniStep = Number.MAX_VALUE;
+//   let memo = new Array(nums.length - 1).fill(0);
+
+//   const calcMiniJump = (  )
+//   console.log(memo);
+//   return memo[nums.length - 2];
+// };
+
+var jump = function (nums) {
+  if (nums.length === 1) return 0;
+  let jump = 1;
+  let curEnd = nums[0];
+  let maxReach = nums[0];
+  // for (let i = 0; i < nums.length; i++) {
+  for (let i = 0; i < nums.length - 1; i++) {
+    maxReach = Math.max(maxReach, i + nums[i]);
+    // when finishing iterate current Max range, finish a jump too
+    // After finishing iterating up to the current maximum range, also make a jump
+    if (i === curEnd) {
+      curEnd = maxReach;
+      jump++;
+    }
+  }
+  return jump;
+};
+// console.log(jump([2, 3, 1, 1, 4]));
+// return;
 // 3
 console.log(jump([5, 9, 3, 2, 1, 0, 2, 3, 3, 1, 0, 0]));
+// return;
 console.log(jump([3, 1, 1, 1, 1]));
 // return;
 console.log(jump([2, 2, 0, 1]));

@@ -66,6 +66,57 @@ var solveSudoku = function (board) {
   // backTrack(board, 0, 0);
 };
 
+var solveSudoku = function (board) {
+  var isValidSudoku = function (board, i, j, val) {
+    for (let k = 0; k < 9; k++) {
+      if (board[i][k] === val) {
+        return false;
+      }
+    }
+    for (let k = 0; k < 9; k++) {
+      if (board[k][j] === val) {
+        return false;
+      }
+    }
+    let row = Math.floor(i / 3) * 3;
+    let col = Math.floor(j / 3) * 3;
+    for (let r = row; r < row + 3; r++) {
+      for (let c = col; c < col + 3; c++) {
+        if (board[r][c] === val) return false;
+      }
+    }
+    return true;
+  };
+
+  var backtrack = (board, row, col) => {
+    if (col === 9) {
+      if (row === 8) {
+        return true;
+      } else return backtrack(board, row + 1, 0);
+    } else {
+      if (board[row][col] === ".") {
+        for (let i = 1; i <= 9; i++) {
+          if (isValidSudoku(board, row, col, `${i}`)) {
+            board[row][col] = `${i}`;
+            if (!backtrack(board, row, col + 1)) {
+              board[row][col] = ".";
+            } else {
+              return true;
+            }
+          } else {
+            if (i === 9) {
+              return false;
+            }
+          }
+        }
+      } else {
+        return backtrack(board, row, col + 1);
+      }
+    }
+  };
+  backtrack(board, 0, 0);
+};
+
 var board = [
   ["5", "3", ".", ".", "7", ".", ".", ".", "."],
   ["6", ".", ".", "1", "9", "5", ".", ".", "."],
